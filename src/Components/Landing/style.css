@@ -1,0 +1,10 @@
+.modal-kickoff {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.modal-text {
+    text-align: center;
+    margin: 15px 0 15px 0;
+}
