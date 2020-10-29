@@ -48,7 +48,7 @@ const Layout = ({ civicData }) => {
                 <Col className="gutter-row" lg={6} md={9} sm={24} xs={24} >
                     <div style={styles}>
                         <Card style={cardStyle}>
-                            <div className="rep-photo" style={{ backgroundImage: `url(${photFixer})` }} ></div>
+                            <div className="rep-photo" style={{ backgroundImage: `url("${photFixer}")` }} ></div>
                             <h3>{usSenRepOneName}</h3>
                             {usSenRepsTitle} of {usSenArea}
                             <div><a href={usSenRepOneWebLink} target="_blank" rel="noreferrer">Website</a></div>
@@ -58,7 +58,7 @@ const Layout = ({ civicData }) => {
                 <Col className="gutter-row" lg={6} md={9} sm={24} xs={24} >
                     <div style={styles}>
                         <Card style={cardStyle}>
-                            <div className="rep-photo" style={{ backgroundImage: `url(${usSenRepTwoPhoto || Avatar1})` }} ></div>
+                            <div className="rep-photo" style={{ backgroundImage: `url("${usSenRepTwoPhoto || Avatar1}")` }} ></div>
                             <h3>{usSenRepTwoName}</h3>
                             {usSenRepsTitle} of {usSenArea}
                             <div><a href={usSenRepTwoWebLink} target="_blank" rel="noreferrer">Website</a></div>
@@ -71,7 +71,7 @@ const Layout = ({ civicData }) => {
                 <Col className="gutter-row" lg={6} md={9} sm={24} xs={24} >
                     <div style={styles}>
                         <Card style={cardStyle}>
-                            <div className="rep-photo" style={{ backgroundImage: `url(${usHouseRepPhoto || Avatar1})` }} ></div>
+                            <div className="rep-photo" style={{ backgroundImage: `url("${usHouseRepPhoto || Avatar1}")` }} ></div>
                             <h3>{usHouseRepName}</h3>
                             <div >{usHouseRepsTitle}</div>
                             <div className="rep-title">{usHouseArea}</div>
