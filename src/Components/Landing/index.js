@@ -53,7 +53,7 @@ const Landing = ({ setCivicData }) => {
             }).catch((err) => {
                 console.log(err)
                 setModalData({
-                    ModalText: 'Sorry, please try either option again. For accurate results please provide a complete address in the input field below.',
+                    ModalText: 'Sorry, please try again. Ensure location services is activated on your device for the button option above. For more accurate results please provide a complete address in the input field below.',
                     confirmLoading: false,
                 });
             })
