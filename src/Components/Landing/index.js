@@ -41,7 +41,6 @@ const Landing = ({ setCivicData }) => {
                     usHouseRep: res.data.officials[res.data.offices[3].officialIndices[0]],
                     usHouseArea: res.data.divisions[usHouseInfo],
                 }
-                console.log(civicResults.address)
 
                 setTimeout(() => {
                     setModalData({
@@ -52,6 +51,7 @@ const Landing = ({ setCivicData }) => {
                 }, 475);
 
             }).catch((err) => {
+                console.log(err)
                 setModalData({
                     ModalText: 'Sorry, please try either option again. For accurate results please provide a complete address in the input field below.',
                     confirmLoading: false,
@@ -67,6 +67,7 @@ const Landing = ({ setCivicData }) => {
 
     useEffect(() => {
         navigator.geolocation.getCurrentPosition((position) => {
+            console.log(position.coords.latitude, position.coords.longitude)
             setModalData({ lat: position.coords.latitude, long: position.coords.longitude })
         })
     }, [])
