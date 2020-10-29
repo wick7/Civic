@@ -12,7 +12,7 @@ const App = () => {
   return (
     <div className="App">
       <Landing setCivicData={setCivicData} />
-      <Layout civicData={civicData} />
+      {civicData ? <Layout civicData={civicData} /> : ''}
     </div>
   );
 }

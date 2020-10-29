@@ -1,5 +1,5 @@
 import React, { useReducer, useState, useEffect } from 'react';
-import { Modal, Button, Input, Row, Col } from 'antd';
+import { Modal, Button, Input, Row, Col, Tooltip } from 'antd';
 import axios from 'axios';
 import './style.css'
 import 'dotenv'
@@ -12,7 +12,7 @@ const Landing = ({ setCivicData }) => {
     const [modalData, setModalData] = useReducer(
         (state, newState) => ({ ...state, ...newState }),
         {
-            ModalText: 'OR',
+            ModalText: 'Or for more accurate results enter an address below.',
             visible: true,
             confirmLoading: false,
             lat: 0,
@@ -27,29 +27,9 @@ const Landing = ({ setCivicData }) => {
             });
 
             await axios(`https://www.googleapis.com/civicinfo/v2/representatives?address=${inputAddress ? inputAddress : modalData.lat + ',' + modalData.long}&key=${process.env.REACT_APP_GOOGLE_API_KEY}`).then((res) => {
-                setTimeout(() => {
-                    setModalData({
-                        visible: false,
-                        confirmLoading: false,
-                    });
-                }, 2000);
 
                 let usSenInfo = res.data.offices[2].divisionId
                 let usHouseInfo = res.data.offices[3].divisionId
-
-                console.log(res.data)
-                console.log(res.data.offices[2])
-                console.log(res.data.offices[3])
-
-
-
-
-                console.log(res.data.divisions[usSenInfo])
-                console.log(res.data.divisions[usHouseInfo])
-
-                console.log(res.data.officials[res.data.offices[2].officialIndices[0]])
-                console.log(res.data.officials[res.data.offices[2].officialIndices[1]])
-                console.log(res.data.officials[res.data.offices[3].officialIndices[0]])
 
                 let civicResults = {
                     address: res.data.normalizedInput,
@@ -61,8 +41,16 @@ const Landing = ({ setCivicData }) => {
                     usHouseRep: res.data.officials[res.data.offices[3].officialIndices[0]],
                     usHouseArea: res.data.divisions[usHouseInfo],
                 }
-                console.log(civicResults)
-                setCivicData(civicResults)
+                console.log(civicResults.address)
+
+                setTimeout(() => {
+                    setModalData({
+                        visible: false,
+                        confirmLoading: false,
+                    });
+                    setCivicData(civicResults)
+                }, 475);
+
             }).catch((err) => {
                 setModalData({
                     ModalText: 'Sorry, please try either option again. For accurate results please provide a complete address in the input field below.',
@@ -78,7 +66,6 @@ const Landing = ({ setCivicData }) => {
     }
 
     useEffect(() => {
-        console.log('API: ' + process.env.REACT_APP_GOOGLE_API_KEY)
         navigator.geolocation.getCurrentPosition((position) => {
             setModalData({ lat: position.coords.latitude, long: position.coords.longitude })
         })
@@ -95,7 +82,8 @@ const Landing = ({ setCivicData }) => {
                 <Row justify={'center'}>
                     <Col>
                         <div className="modal-kickoff">
-                            <Button type="primary" onClick={handleOk} disabled={inputAddress ? true : false} >Click for Location Services</Button>
+                            <h4>Find out who are your Senators and House Representative!</h4>
+                            <Tooltip title="Location is based on ISP provider"><Button type="primary" onClick={handleOk} disabled={inputAddress ? true : false} >Click for Location Services</Button></Tooltip>
                             <div className="modal-text">{modalData.ModalText}</div>
                             <Search
                                 placeholder="Enter an Address"
