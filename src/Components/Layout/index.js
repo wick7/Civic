@@ -3,7 +3,7 @@ import { Row, Col, Card, Divider } from 'antd';
 import './style.css';
 import Avatar1 from './avatar1.svg';
 
-const styles = { background: '', padding: '8px 0' };
+const styles = { background: '', padding: '8px 0', display: 'flex', justifyContent: 'center' };
 const cardStyle = { width: '100%', height: 'auto', padding: '10px', display: 'flex', justifyContent: 'center' }
 
 const Layout = ({ civicData }) => {
